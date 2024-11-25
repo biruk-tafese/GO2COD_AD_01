@@ -43,6 +43,15 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
+  void prevQuestion() {
+    setState(() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        selectedOption = null; // Reset selected option when going back
+      }
+    });
+  }
+
   void showEndDialog(String message) {
     showDialog(
       context: context,
@@ -159,6 +168,22 @@ class _QuizScreenState extends State<QuizScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Previous Button
+                if (currentQuestionIndex > 0)
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 24,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      backgroundColor: Colors.grey,
+                    ),
+                    onPressed: prevQuestion,
+                    child: const Text("Previous"),
+                  ),
                 // Check Answer Button
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
